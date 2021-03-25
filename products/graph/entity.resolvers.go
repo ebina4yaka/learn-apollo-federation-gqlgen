@@ -5,13 +5,17 @@ package graph
 
 import (
 	"context"
-	"fmt"
 	"learn-apollo-federation-gqlgen/products/graph/generated"
 	"learn-apollo-federation-gqlgen/products/graph/model"
 )
 
 func (r *entityResolver) FindProductByUpc(ctx context.Context, upc string) (*model.Product, error) {
-	panic(fmt.Errorf("not implemented"))
+	for _, h := range hats {
+		if h.Upc == upc {
+			return h, nil
+		}
+	}
+	return nil, nil
 }
 
 // Entity returns generated.EntityResolver implementation.

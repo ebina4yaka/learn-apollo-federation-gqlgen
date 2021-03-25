@@ -32,14 +32,6 @@ func (r *userResolver) Reviews(ctx context.Context, obj *model.User) ([]*model.R
 	return res, nil
 }
 
-type ProductResolver interface {
-	Reviews(ctx context.Context, obj *model.Product) ([]*model.Review, error)
-}
-
-type UserResolver interface {
-	Reviews(ctx context.Context, obj *model.User) ([]*model.Review, error)
-}
-
 func (r *Resolver) Product() ProductResolver { return &productResolver{r} }
 
 func (r *Resolver) User() UserResolver { return &userResolver{r} }
