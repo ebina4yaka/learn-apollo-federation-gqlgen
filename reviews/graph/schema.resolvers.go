@@ -5,6 +5,7 @@ package graph
 
 import (
 	"context"
+	"learn-apollo-federation-gqlgen/reviews/graph/generated"
 	"learn-apollo-federation-gqlgen/reviews/graph/model"
 )
 
@@ -32,9 +33,11 @@ func (r *userResolver) Reviews(ctx context.Context, obj *model.User) ([]*model.R
 	return res, nil
 }
 
-func (r *Resolver) Product() ProductResolver { return &productResolver{r} }
+// Product returns generated.ProductResolver implementation.
+func (r *Resolver) Product() generated.ProductResolver { return &productResolver{r} }
 
-func (r *Resolver) User() UserResolver { return &userResolver{r} }
+// User returns generated.UserResolver implementation.
+func (r *Resolver) User() generated.UserResolver { return &userResolver{r} }
 
 type productResolver struct{ *Resolver }
 type userResolver struct{ *Resolver }
