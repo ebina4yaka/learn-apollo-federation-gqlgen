@@ -5,17 +5,20 @@ package graph
 
 import (
 	"context"
-	"learn-apollo-federation-gqlgen/products/graph/generated"
-	"learn-apollo-federation-gqlgen/products/graph/model"
+	"learn-apollo-federation-gqlgen/accounts/graph/generated"
+	"learn-apollo-federation-gqlgen/accounts/graph/model"
 )
 
-func (r *entityResolver) FindProductByUpc(ctx context.Context, upc string) (*model.Product, error) {
-	for _, h := range hats {
-		if h.Upc == upc {
-			return h, nil
-		}
+func (r *entityResolver) FindUserByID(ctx context.Context, id string) (*model.User, error) {
+	name := "User " + id
+	if id == "1234" {
+		name = "Me"
 	}
-	return nil, nil
+
+	return &model.User{
+		ID:       id,
+		Username: name,
+	}, nil
 }
 
 // Entity returns generated.EntityResolver implementation.
