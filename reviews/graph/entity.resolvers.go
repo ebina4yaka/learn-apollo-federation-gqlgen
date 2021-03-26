@@ -5,17 +5,20 @@ package graph
 
 import (
 	"context"
-	"fmt"
 	"learn-apollo-federation-gqlgen/reviews/graph/generated"
 	"learn-apollo-federation-gqlgen/reviews/graph/model"
 )
 
 func (r *entityResolver) FindProductByUpc(ctx context.Context, upc string) (*model.Product, error) {
-	panic(fmt.Errorf("not implemented"))
+	return &model.Product{
+		Upc: upc,
+	}, nil
 }
 
 func (r *entityResolver) FindUserByID(ctx context.Context, id string) (*model.User, error) {
-	panic(fmt.Errorf("not implemented"))
+	return &model.User{
+		ID: id,
+	}, nil
 }
 
 // Entity returns generated.EntityResolver implementation.

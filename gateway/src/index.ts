@@ -1,12 +1,19 @@
-import { ApolloServer } from 'apollo-server'
+import { ApolloServer } from 'apollo-server/dist'
 import { ApolloGateway } from '@apollo/gateway'
 
+type Service = {
+    name: string
+    url: string
+}
+
+const serviceList: Service[] = [
+  { name: 'accounts', url: process.env.ACCOUNTS_URL !== undefined ? process.env.ACCOUNTS_URL : 'http://localhost:4001/query' },
+  { name: 'products', url: process.env.PRODUCTS_URL !== undefined ? process.env.PRODUCTS_URL : 'http://localhost:4002/query' },
+  { name: 'reviews', url: process.env.REVIEWS_URL !== undefined ? process.env.REVIEWS_URL : 'http://localhost:4003/query' }
+]
+
 const gateway = new ApolloGateway({
-  serviceList: [
-    { name: 'accounts', url: 'http://localhost:4001/query' },
-    { name: 'products', url: 'http://localhost:4002/query' },
-    { name: 'reviews', url: 'http://localhost:4003/query' }
-  ]
+  serviceList
 })
 
 const server = new ApolloServer({
@@ -15,6 +22,6 @@ const server = new ApolloServer({
   subscriptions: false
 })
 
-server.listen().then(({ url }) => {
+server.listen().then(({ url }: {url: string}) => {
   console.log(`🚀 Server ready at ${url}`)
 })

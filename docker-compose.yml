@@ -1,0 +1,33 @@
+version: '3.9'
+services:
+  gateway:
+    build:
+      context: ./gateway
+    environment:
+      - ACCOUNTS_URL=http://accounts:4001/query
+      - PRODUCTS_URL=http://products:4002/query
+      - REVIEWS_URL=http://reviews:4003/query
+    ports:
+      - "4000:4000"
+    depends_on:
+      - accounts
+      - products
+      - reviews
+
+  accounts:
+    build:
+      context: ./accounts
+    environment:
+      - PORT=4001
+
+  products:
+    build:
+      context: ./products
+    environment:
+      - PORT=4002
+
+  reviews:
+    build:
+      context: ./reviews
+    environment:
+      - PORT=4003
