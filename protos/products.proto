@@ -2,13 +2,17 @@ syntax = "proto3";
 
 package products;
 
-option go_package = "grpc;grpc";
+option go_package = "proto/generated;generated";
 
 message Product {
   uint64 id = 1;
   string upc = 2;
   string name = 3;
   int64 price = 4;
+}
+
+message ProductsResponse {
+  repeated Product products = 1;
 }
 
 message ProductQuery {
@@ -21,5 +25,5 @@ message TopProductsQuery {
 
 service ProductService {
   rpc FindProductByUpc(ProductQuery) returns (Product) {}
-  rpc TopProducts(TopProductsQuery) returns (stream Product) {}
+  rpc TopProducts(TopProductsQuery) returns (ProductsResponse) {}
 }

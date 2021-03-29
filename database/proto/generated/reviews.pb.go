@@ -4,7 +4,7 @@
 // 	protoc        v3.15.6
 // source: reviews.proto
 
-package grpc
+package generated
 
 import (
 	context "context"
@@ -100,6 +100,53 @@ func (x *Review) GetProduct() *Product {
 	return nil
 }
 
+type ReviewsResponse struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Reviews []*Review `protobuf:"bytes,1,rep,name=reviews,proto3" json:"reviews,omitempty"`
+}
+
+func (x *ReviewsResponse) Reset() {
+	*x = ReviewsResponse{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_reviews_proto_msgTypes[1]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ReviewsResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReviewsResponse) ProtoMessage() {}
+
+func (x *ReviewsResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_reviews_proto_msgTypes[1]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReviewsResponse.ProtoReflect.Descriptor instead.
+func (*ReviewsResponse) Descriptor() ([]byte, []int) {
+	return file_reviews_proto_rawDescGZIP(), []int{1}
+}
+
+func (x *ReviewsResponse) GetReviews() []*Review {
+	if x != nil {
+		return x.Reviews
+	}
+	return nil
+}
+
 type ProductReviewsQuery struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -111,7 +158,7 @@ type ProductReviewsQuery struct {
 func (x *ProductReviewsQuery) Reset() {
 	*x = ProductReviewsQuery{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_reviews_proto_msgTypes[1]
+		mi := &file_reviews_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -124,7 +171,7 @@ func (x *ProductReviewsQuery) String() string {
 func (*ProductReviewsQuery) ProtoMessage() {}
 
 func (x *ProductReviewsQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_reviews_proto_msgTypes[1]
+	mi := &file_reviews_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -137,7 +184,7 @@ func (x *ProductReviewsQuery) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ProductReviewsQuery.ProtoReflect.Descriptor instead.
 func (*ProductReviewsQuery) Descriptor() ([]byte, []int) {
-	return file_reviews_proto_rawDescGZIP(), []int{1}
+	return file_reviews_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *ProductReviewsQuery) GetUpc() string {
@@ -158,7 +205,7 @@ type UserReviewsQuery struct {
 func (x *UserReviewsQuery) Reset() {
 	*x = UserReviewsQuery{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_reviews_proto_msgTypes[2]
+		mi := &file_reviews_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -171,7 +218,7 @@ func (x *UserReviewsQuery) String() string {
 func (*UserReviewsQuery) ProtoMessage() {}
 
 func (x *UserReviewsQuery) ProtoReflect() protoreflect.Message {
-	mi := &file_reviews_proto_msgTypes[2]
+	mi := &file_reviews_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -184,7 +231,7 @@ func (x *UserReviewsQuery) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UserReviewsQuery.ProtoReflect.Descriptor instead.
 func (*UserReviewsQuery) Descriptor() ([]byte, []int) {
-	return file_reviews_proto_rawDescGZIP(), []int{2}
+	return file_reviews_proto_rawDescGZIP(), []int{3}
 }
 
 func (x *UserReviewsQuery) GetId() uint64 {
@@ -208,23 +255,28 @@ var file_reviews_proto_rawDesc = []byte{
 	0x74, 0x73, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x06, 0x61, 0x75, 0x74, 0x68, 0x6f, 0x72, 0x12,
 	0x2b, 0x0a, 0x07, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x18, 0x04, 0x20, 0x01, 0x28, 0x0b,
 	0x32, 0x11, 0x2e, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x73, 0x2e, 0x50, 0x72, 0x6f, 0x64,
-	0x75, 0x63, 0x74, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x22, 0x27, 0x0a, 0x13,
-	0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x51, 0x75,
-	0x65, 0x72, 0x79, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x70, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
-	0x52, 0x03, 0x75, 0x70, 0x63, 0x22, 0x22, 0x0a, 0x10, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x76,
-	0x69, 0x65, 0x77, 0x73, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x32, 0x93, 0x01, 0x0a, 0x0d, 0x52, 0x65,
-	0x76, 0x69, 0x65, 0x77, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x43, 0x0a, 0x0e, 0x50,
-	0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x12, 0x1c, 0x2e,
-	0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52,
-	0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x0f, 0x2e, 0x72, 0x65,
-	0x76, 0x69, 0x65, 0x77, 0x73, 0x2e, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x22, 0x00, 0x30, 0x01,
-	0x12, 0x3d, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x12,
-	0x19, 0x2e, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65,
-	0x76, 0x69, 0x65, 0x77, 0x73, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x0f, 0x2e, 0x72, 0x65, 0x76,
-	0x69, 0x65, 0x77, 0x73, 0x2e, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x22, 0x00, 0x30, 0x01, 0x42,
-	0x0b, 0x5a, 0x09, 0x67, 0x72, 0x70, 0x63, 0x3b, 0x67, 0x72, 0x70, 0x63, 0x62, 0x06, 0x70, 0x72,
-	0x6f, 0x74, 0x6f, 0x33,
+	0x75, 0x63, 0x74, 0x52, 0x07, 0x70, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x22, 0x3c, 0x0a, 0x0f,
+	0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x12,
+	0x29, 0x0a, 0x07, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x0f, 0x2e, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x2e, 0x52, 0x65, 0x76, 0x69, 0x65,
+	0x77, 0x52, 0x07, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x22, 0x27, 0x0a, 0x13, 0x50, 0x72,
+	0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x51, 0x75, 0x65, 0x72,
+	0x79, 0x12, 0x10, 0x0a, 0x03, 0x75, 0x70, 0x63, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03,
+	0x75, 0x70, 0x63, 0x22, 0x22, 0x0a, 0x10, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x76, 0x69, 0x65,
+	0x77, 0x73, 0x51, 0x75, 0x65, 0x72, 0x79, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x04, 0x52, 0x02, 0x69, 0x64, 0x32, 0xa1, 0x01, 0x0a, 0x0d, 0x52, 0x65, 0x76, 0x69,
+	0x65, 0x77, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x4a, 0x0a, 0x0e, 0x50, 0x72, 0x6f,
+	0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x12, 0x1c, 0x2e, 0x72, 0x65,
+	0x76, 0x69, 0x65, 0x77, 0x73, 0x2e, 0x50, 0x72, 0x6f, 0x64, 0x75, 0x63, 0x74, 0x52, 0x65, 0x76,
+	0x69, 0x65, 0x77, 0x73, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a, 0x18, 0x2e, 0x72, 0x65, 0x76, 0x69,
+	0x65, 0x77, 0x73, 0x2e, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x52, 0x65, 0x73, 0x70, 0x6f,
+	0x6e, 0x73, 0x65, 0x22, 0x00, 0x12, 0x44, 0x0a, 0x0b, 0x55, 0x73, 0x65, 0x72, 0x52, 0x65, 0x76,
+	0x69, 0x65, 0x77, 0x73, 0x12, 0x19, 0x2e, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x2e, 0x55,
+	0x73, 0x65, 0x72, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x51, 0x75, 0x65, 0x72, 0x79, 0x1a,
+	0x18, 0x2e, 0x72, 0x65, 0x76, 0x69, 0x65, 0x77, 0x73, 0x2e, 0x52, 0x65, 0x76, 0x69, 0x65, 0x77,
+	0x73, 0x52, 0x65, 0x73, 0x70, 0x6f, 0x6e, 0x73, 0x65, 0x22, 0x00, 0x42, 0x1b, 0x5a, 0x19, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x2f, 0x67, 0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x3b, 0x67,
+	0x65, 0x6e, 0x65, 0x72, 0x61, 0x74, 0x65, 0x64, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -239,26 +291,28 @@ func file_reviews_proto_rawDescGZIP() []byte {
 	return file_reviews_proto_rawDescData
 }
 
-var file_reviews_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_reviews_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_reviews_proto_goTypes = []interface{}{
 	(*Review)(nil),              // 0: reviews.Review
-	(*ProductReviewsQuery)(nil), // 1: reviews.ProductReviewsQuery
-	(*UserReviewsQuery)(nil),    // 2: reviews.UserReviewsQuery
-	(*User)(nil),                // 3: accounts.User
-	(*Product)(nil),             // 4: products.Product
+	(*ReviewsResponse)(nil),     // 1: reviews.ReviewsResponse
+	(*ProductReviewsQuery)(nil), // 2: reviews.ProductReviewsQuery
+	(*UserReviewsQuery)(nil),    // 3: reviews.UserReviewsQuery
+	(*User)(nil),                // 4: accounts.User
+	(*Product)(nil),             // 5: products.Product
 }
 var file_reviews_proto_depIdxs = []int32{
-	3, // 0: reviews.Review.author:type_name -> accounts.User
-	4, // 1: reviews.Review.product:type_name -> products.Product
-	1, // 2: reviews.ReviewService.ProductReviews:input_type -> reviews.ProductReviewsQuery
-	2, // 3: reviews.ReviewService.UserReviews:input_type -> reviews.UserReviewsQuery
-	0, // 4: reviews.ReviewService.ProductReviews:output_type -> reviews.Review
-	0, // 5: reviews.ReviewService.UserReviews:output_type -> reviews.Review
-	4, // [4:6] is the sub-list for method output_type
-	2, // [2:4] is the sub-list for method input_type
-	2, // [2:2] is the sub-list for extension type_name
-	2, // [2:2] is the sub-list for extension extendee
-	0, // [0:2] is the sub-list for field type_name
+	4, // 0: reviews.Review.author:type_name -> accounts.User
+	5, // 1: reviews.Review.product:type_name -> products.Product
+	0, // 2: reviews.ReviewsResponse.reviews:type_name -> reviews.Review
+	2, // 3: reviews.ReviewService.ProductReviews:input_type -> reviews.ProductReviewsQuery
+	3, // 4: reviews.ReviewService.UserReviews:input_type -> reviews.UserReviewsQuery
+	1, // 5: reviews.ReviewService.ProductReviews:output_type -> reviews.ReviewsResponse
+	1, // 6: reviews.ReviewService.UserReviews:output_type -> reviews.ReviewsResponse
+	5, // [5:7] is the sub-list for method output_type
+	3, // [3:5] is the sub-list for method input_type
+	3, // [3:3] is the sub-list for extension type_name
+	3, // [3:3] is the sub-list for extension extendee
+	0, // [0:3] is the sub-list for field type_name
 }
 
 func init() { file_reviews_proto_init() }
@@ -282,7 +336,7 @@ func file_reviews_proto_init() {
 			}
 		}
 		file_reviews_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ProductReviewsQuery); i {
+			switch v := v.(*ReviewsResponse); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -294,6 +348,18 @@ func file_reviews_proto_init() {
 			}
 		}
 		file_reviews_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ProductReviewsQuery); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_reviews_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UserReviewsQuery); i {
 			case 0:
 				return &v.state
@@ -312,7 +378,7 @@ func file_reviews_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_reviews_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -338,8 +404,8 @@ const _ = grpc.SupportPackageIsVersion6
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type ReviewServiceClient interface {
-	ProductReviews(ctx context.Context, in *ProductReviewsQuery, opts ...grpc.CallOption) (ReviewService_ProductReviewsClient, error)
-	UserReviews(ctx context.Context, in *UserReviewsQuery, opts ...grpc.CallOption) (ReviewService_UserReviewsClient, error)
+	ProductReviews(ctx context.Context, in *ProductReviewsQuery, opts ...grpc.CallOption) (*ReviewsResponse, error)
+	UserReviews(ctx context.Context, in *UserReviewsQuery, opts ...grpc.CallOption) (*ReviewsResponse, error)
 }
 
 type reviewServiceClient struct {
@@ -350,148 +416,94 @@ func NewReviewServiceClient(cc grpc.ClientConnInterface) ReviewServiceClient {
 	return &reviewServiceClient{cc}
 }
 
-func (c *reviewServiceClient) ProductReviews(ctx context.Context, in *ProductReviewsQuery, opts ...grpc.CallOption) (ReviewService_ProductReviewsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ReviewService_serviceDesc.Streams[0], "/reviews.ReviewService/ProductReviews", opts...)
+func (c *reviewServiceClient) ProductReviews(ctx context.Context, in *ProductReviewsQuery, opts ...grpc.CallOption) (*ReviewsResponse, error) {
+	out := new(ReviewsResponse)
+	err := c.cc.Invoke(ctx, "/reviews.ReviewService/ProductReviews", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &reviewServiceProductReviewsClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
+	return out, nil
 }
 
-type ReviewService_ProductReviewsClient interface {
-	Recv() (*Review, error)
-	grpc.ClientStream
-}
-
-type reviewServiceProductReviewsClient struct {
-	grpc.ClientStream
-}
-
-func (x *reviewServiceProductReviewsClient) Recv() (*Review, error) {
-	m := new(Review)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
-}
-
-func (c *reviewServiceClient) UserReviews(ctx context.Context, in *UserReviewsQuery, opts ...grpc.CallOption) (ReviewService_UserReviewsClient, error) {
-	stream, err := c.cc.NewStream(ctx, &_ReviewService_serviceDesc.Streams[1], "/reviews.ReviewService/UserReviews", opts...)
+func (c *reviewServiceClient) UserReviews(ctx context.Context, in *UserReviewsQuery, opts ...grpc.CallOption) (*ReviewsResponse, error) {
+	out := new(ReviewsResponse)
+	err := c.cc.Invoke(ctx, "/reviews.ReviewService/UserReviews", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
-	x := &reviewServiceUserReviewsClient{stream}
-	if err := x.ClientStream.SendMsg(in); err != nil {
-		return nil, err
-	}
-	if err := x.ClientStream.CloseSend(); err != nil {
-		return nil, err
-	}
-	return x, nil
-}
-
-type ReviewService_UserReviewsClient interface {
-	Recv() (*Review, error)
-	grpc.ClientStream
-}
-
-type reviewServiceUserReviewsClient struct {
-	grpc.ClientStream
-}
-
-func (x *reviewServiceUserReviewsClient) Recv() (*Review, error) {
-	m := new(Review)
-	if err := x.ClientStream.RecvMsg(m); err != nil {
-		return nil, err
-	}
-	return m, nil
+	return out, nil
 }
 
 // ReviewServiceServer is the server API for ReviewService service.
 type ReviewServiceServer interface {
-	ProductReviews(*ProductReviewsQuery, ReviewService_ProductReviewsServer) error
-	UserReviews(*UserReviewsQuery, ReviewService_UserReviewsServer) error
+	ProductReviews(context.Context, *ProductReviewsQuery) (*ReviewsResponse, error)
+	UserReviews(context.Context, *UserReviewsQuery) (*ReviewsResponse, error)
 }
 
 // UnimplementedReviewServiceServer can be embedded to have forward compatible implementations.
 type UnimplementedReviewServiceServer struct {
 }
 
-func (*UnimplementedReviewServiceServer) ProductReviews(*ProductReviewsQuery, ReviewService_ProductReviewsServer) error {
-	return status.Errorf(codes.Unimplemented, "method ProductReviews not implemented")
+func (*UnimplementedReviewServiceServer) ProductReviews(context.Context, *ProductReviewsQuery) (*ReviewsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method ProductReviews not implemented")
 }
-func (*UnimplementedReviewServiceServer) UserReviews(*UserReviewsQuery, ReviewService_UserReviewsServer) error {
-	return status.Errorf(codes.Unimplemented, "method UserReviews not implemented")
+func (*UnimplementedReviewServiceServer) UserReviews(context.Context, *UserReviewsQuery) (*ReviewsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UserReviews not implemented")
 }
 
 func RegisterReviewServiceServer(s *grpc.Server, srv ReviewServiceServer) {
 	s.RegisterService(&_ReviewService_serviceDesc, srv)
 }
 
-func _ReviewService_ProductReviews_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(ProductReviewsQuery)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+func _ReviewService_ProductReviews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(ProductReviewsQuery)
+	if err := dec(in); err != nil {
+		return nil, err
 	}
-	return srv.(ReviewServiceServer).ProductReviews(m, &reviewServiceProductReviewsServer{stream})
-}
-
-type ReviewService_ProductReviewsServer interface {
-	Send(*Review) error
-	grpc.ServerStream
-}
-
-type reviewServiceProductReviewsServer struct {
-	grpc.ServerStream
-}
-
-func (x *reviewServiceProductReviewsServer) Send(m *Review) error {
-	return x.ServerStream.SendMsg(m)
-}
-
-func _ReviewService_UserReviews_Handler(srv interface{}, stream grpc.ServerStream) error {
-	m := new(UserReviewsQuery)
-	if err := stream.RecvMsg(m); err != nil {
-		return err
+	if interceptor == nil {
+		return srv.(ReviewServiceServer).ProductReviews(ctx, in)
 	}
-	return srv.(ReviewServiceServer).UserReviews(m, &reviewServiceUserReviewsServer{stream})
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/reviews.ReviewService/ProductReviews",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewServiceServer).ProductReviews(ctx, req.(*ProductReviewsQuery))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
-type ReviewService_UserReviewsServer interface {
-	Send(*Review) error
-	grpc.ServerStream
-}
-
-type reviewServiceUserReviewsServer struct {
-	grpc.ServerStream
-}
-
-func (x *reviewServiceUserReviewsServer) Send(m *Review) error {
-	return x.ServerStream.SendMsg(m)
+func _ReviewService_UserReviews_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UserReviewsQuery)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(ReviewServiceServer).UserReviews(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/reviews.ReviewService/UserReviews",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(ReviewServiceServer).UserReviews(ctx, req.(*UserReviewsQuery))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 var _ReviewService_serviceDesc = grpc.ServiceDesc{
 	ServiceName: "reviews.ReviewService",
 	HandlerType: (*ReviewServiceServer)(nil),
-	Methods:     []grpc.MethodDesc{},
-	Streams: []grpc.StreamDesc{
+	Methods: []grpc.MethodDesc{
 		{
-			StreamName:    "ProductReviews",
-			Handler:       _ReviewService_ProductReviews_Handler,
-			ServerStreams: true,
+			MethodName: "ProductReviews",
+			Handler:    _ReviewService_ProductReviews_Handler,
 		},
 		{
-			StreamName:    "UserReviews",
-			Handler:       _ReviewService_UserReviews_Handler,
-			ServerStreams: true,
+			MethodName: "UserReviews",
+			Handler:    _ReviewService_UserReviews_Handler,
 		},
 	},
+	Streams:  []grpc.StreamDesc{},
 	Metadata: "reviews.proto",
 }

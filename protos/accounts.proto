@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package accounts;
 
-option go_package = "grpc;grpc";
+option go_package = "proto/generated;generated";
 
 message User {
   uint64 id = 1;
