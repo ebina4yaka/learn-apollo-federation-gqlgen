@@ -1,4 +1,9 @@
 version: '3.9'
+
+volumes:
+  apollo_federation_db:
+    driver: local
+
 services:
   gateway:
     build:
@@ -13,21 +18,55 @@ services:
       - accounts
       - products
       - reviews
+      - database
 
   accounts:
     build:
       context: ./accounts
     environment:
       - PORT=4001
+    depends_on:
+      - database
 
   products:
     build:
       context: ./products
     environment:
       - PORT=4002
+    depends_on:
+      - database
 
   reviews:
     build:
       context: ./reviews
     environment:
       - PORT=4003
+    depends_on:
+      - database
+
+  database:
+    build:
+      context: ./database
+    environment:
+      - DB_PORT=5432
+      - DB_HOST=postgres
+      - DB_USER=apollo_federation
+      - DB_PASSWORD=password
+      - DB_NAME=apollo_federation_development
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:13.2
+    ports:
+      - 5432:5432
+    volumes:
+      - type: volume
+        source: apollo_federation_db
+        target: "/var/lib/postgresql/data"
+      - type: bind
+        source: "./initdb"
+        target: "/docker-entrypoint-initdb.d"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
