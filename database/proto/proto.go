@@ -2,6 +2,7 @@ package proto
 
 import (
 	"context"
+	"learn-apollo-federation-gqlgen/database/mapping"
 	"learn-apollo-federation-gqlgen/database/proto/generated"
 )
 
@@ -24,8 +25,13 @@ func (s *Server) TopProducts(ctx context.Context, query *generated.TopProductsQu
 }
 
 func (s *Server) FindUserByID(ctx context.Context, query *generated.UserQuery) (*generated.User, error) {
-	panic("implement me")
+	db, _ := mapping.GetConnection()
+	tx := db.WithContext(ctx)
+	var user mapping.User
+	tx.First(&user, query.Id)
+	result := generated.User{
+		Id:       uint64(user.ID),
+		Username: user.UserName,
+	}
+	return &result, nil
 }
-
-
-
