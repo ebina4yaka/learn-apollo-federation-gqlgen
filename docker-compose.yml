@@ -65,7 +65,7 @@ services:
         source: apollo_federation_db
         target: "/var/lib/postgresql/data"
       - type: bind
-        source: "./initdb"
+        source: "./database/initdb"
         target: "/docker-entrypoint-initdb.d"
     environment:
       - POSTGRES_USER=postgres
