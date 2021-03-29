@@ -1,0 +1,28 @@
+syntax = "proto3";
+
+package reviews;
+
+option go_package = "grpc;grpc";
+
+import "accounts.proto";
+import "products.proto";
+
+message Review {
+  uint64 id = 1;
+  string body = 2;
+  accounts.User author = 3;
+  products.Product product = 4;
+}
+
+message ProductReviewsQuery {
+  string upc = 1;
+}
+
+message UserReviewsQuery {
+  uint64 id = 1;
+}
+
+service ReviewService {
+  rpc ProductReviews(ProductReviewsQuery) returns (stream Review) {}
+  rpc UserReviews(UserReviewsQuery) returns (stream Review) {}
+}
