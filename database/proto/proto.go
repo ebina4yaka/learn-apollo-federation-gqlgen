@@ -21,7 +21,22 @@ func (s *Server) FindProductByUpc(ctx context.Context, query *generated.ProductQ
 }
 
 func (s *Server) TopProducts(ctx context.Context, query *generated.TopProductsQuery) (*generated.ProductsResponse, error) {
-	panic("implement me")
+	db, _ := mapping.GetConnection()
+	tx := db.WithContext(ctx)
+	var products []mapping.Product
+	tx.Order("upc").Limit(int(query.First)).Find(&products)
+	var results []*generated.Product
+	for _, product := range products {
+		results = append(results, &generated.Product{
+			Id:    uint64(product.ID),
+			Upc:   product.Upc,
+			Price: int64(product.Price),
+		})
+	}
+
+	return &generated.ProductsResponse{
+		Products: results,
+	}, nil
 }
 
 func (s *Server) FindUserByID(ctx context.Context, query *generated.UserQuery) (*generated.User, error) {
