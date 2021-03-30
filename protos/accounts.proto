@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package accounts;
+
+option go_package = "proto/generated;generated";
+
+message User {
+  uint64 id = 1;
+  string username = 2;
+}
+
+message UserQuery {
+  uint64 id = 1;
+}
+
+service UserService {
+  rpc FindUserByID(UserQuery) returns (User) {}
+}

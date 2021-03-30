@@ -5,32 +5,44 @@ package graph
 
 import (
 	"context"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/encoding/gzip"
 	"learn-apollo-federation-gqlgen/reviews/graph/generated"
 	"learn-apollo-federation-gqlgen/reviews/graph/model"
+	"learn-apollo-federation-gqlgen/reviews/proto"
+	protoGenerated "learn-apollo-federation-gqlgen/reviews/proto/generated"
+	"log"
+	"strconv"
 )
 
 func (r *productResolver) Reviews(ctx context.Context, obj *model.Product) ([]*model.Review, error) {
-	var res []*model.Review
-
-	for _, review := range reviews {
-		if review.Product.Upc == obj.Upc {
-			res = append(res, review)
-		}
+	conn, _ := proto.GetConnection()
+	defer conn.Close()
+	c := protoGenerated.NewReviewServiceClient(conn)
+	response, err := c.ProductReviews(ctx, &protoGenerated.ProductReviewsQuery{Upc: obj.Upc}, grpc.UseCompressor(gzip.Name))
+	if err != nil {
+		log.Printf("Error when calling FindUserByID: %s\n", err)
 	}
 
-	return res, nil
+	return convertReviewsResponse(response), nil
 }
 
 func (r *userResolver) Reviews(ctx context.Context, obj *model.User) ([]*model.Review, error) {
-	var res []*model.Review
+	conn, _ := proto.GetConnection()
+	defer conn.Close()
+	c := protoGenerated.NewReviewServiceClient(conn)
 
-	for _, review := range reviews {
-		if review.Author.ID == obj.ID {
-			res = append(res, review)
-		}
+	uintId, err := strconv.ParseUint(obj.ID, 10, 64)
+	if err != nil {
+		log.Printf("can not convert id to uint: %s\n", err)
 	}
 
-	return res, nil
+	response, err := c.UserReviews(ctx, &protoGenerated.UserReviewsQuery{Id: uintId}, grpc.UseCompressor(gzip.Name))
+	if err != nil {
+		log.Printf("Error when calling FindUserByID: %s\n", err)
+	}
+
+	return convertReviewsResponse(response), nil
 }
 
 // Product returns generated.ProductResolver implementation.

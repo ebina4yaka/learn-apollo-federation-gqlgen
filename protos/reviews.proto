@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package reviews;
+
+option go_package = "proto/generated;generated";
+
+import "accounts.proto";
+import "products.proto";
+
+message Review {
+  uint64 id = 1;
+  string body = 2;
+  accounts.User author = 3;
+  products.Product product = 4;
+}
+
+message ReviewsResponse {
+  repeated Review reviews = 1;
+}
+
+message ProductReviewsQuery {
+  string upc = 1;
+}
+
+message UserReviewsQuery {
+  uint64 id = 1;
+}
+
+service ReviewService {
+  rpc ProductReviews(ProductReviewsQuery) returns (ReviewsResponse) {}
+  rpc UserReviews(UserReviewsQuery) returns (ReviewsResponse) {}
+}
