@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"google.golang.org/grpc"
+	_ "google.golang.org/grpc/encoding/gzip"
 	"learn-apollo-federation-gqlgen/database/proto"
 	"learn-apollo-federation-gqlgen/database/proto/generated"
 	"log"
@@ -21,6 +22,7 @@ func main() {
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
+	log.Printf("Listen to :%s\n", port)
 
 	s := proto.Server{}
 	grpcServer := grpc.NewServer()

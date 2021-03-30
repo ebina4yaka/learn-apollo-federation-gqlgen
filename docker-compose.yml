@@ -18,7 +18,6 @@ services:
       - accounts
       - products
       - reviews
-      - database
 
   accounts:
     build:
@@ -27,6 +26,8 @@ services:
       - PORT=4001
       - GRPC_PORT=9000
       - GRPC_HOST=database
+      - HTTP_PROXY=
+      - HTTPS_PROXY=
     depends_on:
       - database
 
