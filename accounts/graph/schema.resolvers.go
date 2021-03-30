@@ -5,15 +5,26 @@ package graph
 
 import (
 	"context"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/encoding/gzip"
 	"learn-apollo-federation-gqlgen/accounts/graph/generated"
 	"learn-apollo-federation-gqlgen/accounts/graph/model"
+	"learn-apollo-federation-gqlgen/accounts/proto"
+	protoGenerated "learn-apollo-federation-gqlgen/accounts/proto/generated"
+	"log"
 )
 
 func (r *queryResolver) Me(ctx context.Context) (*model.User, error) {
-	return &model.User{
-		ID:       "1234",
-		Username: "Me",
-	}, nil
+	conn, _ := proto.GetConnection()
+	defer conn.Close()
+	c := protoGenerated.NewUserServiceClient(conn)
+
+	response, err := c.FindUserByID(ctx, &protoGenerated.UserQuery{Id: 1}, grpc.UseCompressor(gzip.Name))
+	if err != nil {
+		log.Printf("Error when calling FindUserByID in Me: %s\n", err)
+	}
+
+	return convertUser(response), nil
 }
 
 // Query returns generated.QueryResolver implementation.

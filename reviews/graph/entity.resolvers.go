@@ -5,20 +5,44 @@ package graph
 
 import (
 	"context"
+	"google.golang.org/grpc"
+	"google.golang.org/grpc/encoding/gzip"
 	"learn-apollo-federation-gqlgen/reviews/graph/generated"
 	"learn-apollo-federation-gqlgen/reviews/graph/model"
+	"learn-apollo-federation-gqlgen/reviews/proto"
+	protoGenerated "learn-apollo-federation-gqlgen/reviews/proto/generated"
+	"log"
+	"strconv"
 )
 
 func (r *entityResolver) FindProductByUpc(ctx context.Context, upc string) (*model.Product, error) {
-	return &model.Product{
-		Upc: upc,
-	}, nil
+	conn, _ := proto.GetConnection()
+	defer conn.Close()
+	c := protoGenerated.NewProductServiceClient(conn)
+	response, err := c.FindProductByUpc(ctx, &protoGenerated.ProductQuery{Upc: upc}, grpc.UseCompressor(gzip.Name))
+	if err != nil {
+		log.Printf("Error when calling FindUserByID: %s\n", err)
+	}
+
+	return convertProduct(response), nil
 }
 
 func (r *entityResolver) FindUserByID(ctx context.Context, id string) (*model.User, error) {
-	return &model.User{
-		ID: id,
-	}, nil
+	conn, _ := proto.GetConnection()
+	defer conn.Close()
+	c := protoGenerated.NewUserServiceClient(conn)
+
+	uintId, err := strconv.ParseUint(id, 10, 64)
+	if err != nil {
+		log.Printf("can not convert id to uint: %s\n", err)
+	}
+
+	response, err := c.FindUserByID(ctx, &protoGenerated.UserQuery{Id: uintId}, grpc.UseCompressor(gzip.Name))
+	if err != nil {
+		log.Printf("Error when calling FindUserByID: %s\n", err)
+	}
+
+	return convertUser(response), nil
 }
 
 // Entity returns generated.EntityResolver implementation.
