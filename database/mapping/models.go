@@ -10,7 +10,7 @@ type User struct {
 
 type Product struct {
 	gorm.Model
-	Upc     string
+	Upc     string `gorm:"unique"`
 	Name    string
 	Price   int
 	Reviews []Review
