@@ -25,6 +25,7 @@ services:
       context: ./accounts
     environment:
       - PORT=4001
+      - GRPC_PORT=9000
     depends_on:
       - database
 
@@ -33,6 +34,7 @@ services:
       context: ./products
     environment:
       - PORT=4002
+      - GRPC_PORT=9000
     depends_on:
       - database
 
@@ -41,6 +43,7 @@ services:
       context: ./reviews
     environment:
       - PORT=4003
+      - GRPC_PORT=9000
     depends_on:
       - database
 
