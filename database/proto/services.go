@@ -64,6 +64,7 @@ func convertProduct(product *mapping.Product) *generated.Product {
 	return &generated.Product{
 		Id:    uint64(product.ID),
 		Upc:   product.Upc,
+		Name:   product.Name,
 		Price: int64(product.Price),
 	}
 }
