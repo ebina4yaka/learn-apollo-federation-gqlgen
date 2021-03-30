@@ -10,9 +10,6 @@ func main() {
 	if err != nil {
 		panic("Failed to migrate database.")
 	}
-	db.Delete(&mapping.User{})
-	db.Delete(&mapping.Product{})
-	db.Delete(&mapping.Review{})
 	userMe := mapping.User{UserName: "Me"}
 	userOther := mapping.User{UserName: "Other"}
 	db.Create(&userMe)
@@ -24,17 +21,17 @@ func main() {
 	db.Create(&product2)
 	db.Create(&product3)
 	review1 := mapping.Review{
-		Body: "A highly effective form of birth control.",
+		Body:      "A highly effective form of birth control.",
 		ProductID: product1.ID,
 		AuthorID:  userMe.ID,
 	}
 	review2 := mapping.Review{
-		Body: "Fedoras are one of the most fashionable hats around and can look great with a variety of outfits.",
+		Body:      "Fedoras are one of the most fashionable hats around and can look great with a variety of outfits.",
 		ProductID: product2.ID,
 		AuthorID:  userMe.ID,
 	}
 	review3 := mapping.Review{
-		Body: "A highly effective form of birth control.",
+		Body:      "This is the last straw. Hat you will wear. 11/10",
 		ProductID: product2.ID,
 		AuthorID:  userOther.ID,
 	}

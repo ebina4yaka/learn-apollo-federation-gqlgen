@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"google.golang.org/grpc"
-	"learn-apollo-federation-gqlgen/database/mapping"
 	"learn-apollo-federation-gqlgen/database/proto"
 	"learn-apollo-federation-gqlgen/database/proto/generated"
 	"log"
@@ -14,11 +13,6 @@ import (
 const defaultPort = "9000"
 
 func main() {
-	db, _ := mapping.GetConnection()
-	err := db.AutoMigrate(&mapping.User{}, &mapping.Product{}, &mapping.Review{})
-	if err != nil {
-		panic("Failed to migrate database.")
-	}
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = defaultPort

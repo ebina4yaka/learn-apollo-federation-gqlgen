@@ -48,6 +48,7 @@ services:
     build:
       context: ./database
     environment:
+      - PORT=9000
       - DB_PORT=5432
       - DB_HOST=postgres
       - DB_USER=apollo_federation
